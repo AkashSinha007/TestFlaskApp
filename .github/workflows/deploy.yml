@@ -1,0 +1,37 @@
+# .github/workflows/python-app.yml
+name: Python application
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: 3.10.11
+
+    - name: Install dependencies
+      run: |
+        pip install flit
+        flit install --deps production
+
+    - name: Install test dependencies
+      run: |
+        pip install pytest coverage
+
+    - name: Run tests with coverage
+      run: |
+        coverage run -m pytest
+        coverage report
+        coverage html  # Generate HTML report

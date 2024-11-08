@@ -1,0 +1,22 @@
+# pyproject.toml
+[project]
+name = "TestFlaskApp"
+version = "1.0.0"
+description = "A simple Flask app with GitHub Actions and coverage reporting"
+dependencies = [
+    "flask"
+]
+
+[project.optional-dependencies]
+test = ["pytest", "coverage"]
+
+[build-system]
+requires = ["flit_core<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.coverage.run]
+branch = true
+source = ["app", "tests"]

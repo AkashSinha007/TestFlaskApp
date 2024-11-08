@@ -25,13 +25,16 @@ jobs:
       run: |
         pip install flit
         flit install --deps production
+      working-directory: .
 
     - name: Install test dependencies
       run: |
         pip install pytest coverage
+      working-directory: .
 
     - name: Run tests with coverage
       run: |
         coverage run -m pytest
         coverage report
         coverage html  # Generate HTML report
+      working-directory: .
